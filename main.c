@@ -108,27 +108,50 @@ int main(int argc, char *argv[])
                 }
                 printf("Digite o nome do valor de saida: ");
                 scanf(" %c", &outputLetter);
-                char newTerm;
-                int newNum;
-                //printf("Max e: %d\n", max);
-                for (int i = 0; i < max; i++) {
-                    printf("Digite o valor da saida %d:\n", i+1);
-                    while (true) {
-                        if(scanf("%d%c", &newNum, &newTerm) != 2 || newTerm != '\n') {
-                            printf("Digite um valor numerico!\n");
-                            scanf("%*[^\n]");
+                printf("\nDigite 0 para preencher a tabela de saida com valores aleatorios\n");
+                printf("Digite 1 para preencher a tabela de saida manualmente\n");
+
+                int option;
+                char optionTerm;
+                if(scanf("%d%c", &option, &optionTerm) != 2 || optionTerm != '\n') {
+                    printf("Digite um valor numerico!\n");
+                    scanf("%*[^\n]");
+                }
+                else {
+                    if(option < 0 || option > 1)
+                        printf("Digite um valor valido!('0' ou '1')\n");
+                    else {
+                        srand(time(0));
+                        if (option == 0) {
+                            for(int i = 0; i < max; i++) {
+                                output[i] = rand() % 2;
+                            }
                         }
                         else {
-                            if(newNum < 0 || newNum > 1)
-                                printf("Digite um valor valido!('0' ou '1')\n");
-                            else {
-                                //printf("NewNum é: %d\n", newNum);
-                                output[i] = newNum;
-                                break;
+                            char newTerm;
+                            int newNum;
+                            //printf("Max e: %d\n", max);
+                            for (int i = 0; i < max; i++) {
+                                printf("Digite o valor da saida %d:\n", i);
+                                while (true) {
+                                    if(scanf("%d%c", &newNum, &newTerm) != 2 || newTerm != '\n') {
+                                        printf("Digite um valor numerico!\n");
+                                        scanf("%*[^\n]");
+                                    }
+                                    else {
+                                        if(newNum < 0 || newNum > 1)
+                                            printf("Digite um valor valido!('0' ou '1')\n");
+                                        else {
+                                            //printf("NewNum é: %d\n", newNum);
+                                            output[i] = newNum;
+                                            break;
+                                        }
+                                    }
+                                }
+                                //printf("I é: %d\n", i);
                             }
                         }
                     }
-                    //printf("I é: %d\n", i);
                 }
                 int binaryNum[num][max];
                 int arrayValue = 8;
