@@ -164,6 +164,7 @@ int main(int argc, char *argv[])
                 
                 int sumOperations = 0;
                 int multiOperations = 0;
+                int invOperations = 0;
                 printf("\n");
                 PrintLetters(true, num, inputLetters);
                 printf(" | %c \n", outputLetter);
@@ -185,40 +186,56 @@ int main(int argc, char *argv[])
                     printf("| %d\n", output[i]);
                     //printf("\n");
                 }
-                printf("MinTermo: ");
+                printf("MinTermo: \n");
+                printf("%c = ", outputLetter);
                 for (int i = 0; i < minTermoCount; i++) {
                     for (int j = 0; j < num; j++) {
                         if(binaryNum[j][minTermo[i]] == 0) {
-                            printf("!");
+                            printf("~");
+                            invOperations++;
                         }
                         printf("%c", PrintLetters(false, j, inputLetters));
-                        multiOperations++;
+                        if (j+1 != num) {
+                            printf(".");
+                            multiOperations++;
+                        }
                     }
                     if (i+1 == minTermoCount)
                         break;
                     printf(" + ");
                     sumOperations++;
                 }
-                printf("\nNumero de operacoes +: %d", sumOperations);
-                printf("\nNumero de operacoes *: %d", multiOperations);
-                printf("\nMaxTermo: ");
+                printf("\nNumero de operacoes 'E' : %d", multiOperations);
+                printf("\nNumero de operacoes 'OU' : %d", sumOperations);
+                printf("\nNumero de operacoes 'NAO' : %d", invOperations);
+                printf("\n");
+                printf("\nMaxTermo: \n");
+                printf("%c = ", outputLetter);
                 sumOperations = 0;
                 multiOperations = 0;
+                invOperations = 0;
                 for (int i = 0; i < maxTermoCount; i++) {
+                    printf("(");
                     for (int j = 0; j < num; j++) {
                         if(binaryNum[j][maxTermo[i]] == 1) {
-                            printf("!");
+                            printf("~");
+                            invOperations++;
                         }
                         printf("%c", PrintLetters(false, j, inputLetters));
-                        sumOperations++;
+                        if (j+1 != num) {
+                            printf("+");
+                            sumOperations++;
+                        }
                     }
+                    printf(")");
                     if (i+1 == maxTermoCount)
                         break;
                     printf(" . ");
                     multiOperations++;
                 }
-                printf("\nNumero de operacoes *: %d", multiOperations);
-                printf("\nNumero de operacoes +: %d", sumOperations);
+                printf("\nNumero de operacoes 'E' : %d", multiOperations);
+                printf("\nNumero de operacoes 'OU' : %d", sumOperations);
+                printf("\nNumero de operacoes 'NAO' : %d", invOperations);
                 break;
             }
         }
